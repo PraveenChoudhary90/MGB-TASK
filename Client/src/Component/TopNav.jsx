@@ -14,6 +14,7 @@ const TopNav  = ()=>{
             <Nav.Link  as={Link} to="home">Home</Nav.Link>
             <Nav.Link as={Link}  to="about">Features</Nav.Link>
             <Nav.Link as={Link}  to="insert">Customer</Nav.Link>
+            <Nav.Link as={Link}  to="product">Product</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
