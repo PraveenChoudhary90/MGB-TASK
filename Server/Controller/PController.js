@@ -1,4 +1,5 @@
 const CusModel = require("../Model/CusModel");
+const OrderModel = require("../Model/OrderModel");
 const PModel = require("../Model/PModel");
 
 
@@ -42,13 +43,18 @@ const Displaydata  =async(req,res)=>{
 }
 
 
+const OrderDetails = async(req,res)=>{
+    const Data = await OrderModel.find();
+    res.send(Data);
+}
 
 
 
 module.exports  ={
     CustomerInsert,
     ProductInsert,
-    Displaydata
+    Displaydata,
+    OrderDetails
 }
 
 

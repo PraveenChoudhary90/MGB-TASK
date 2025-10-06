@@ -10,6 +10,7 @@ import Cartdata from './Pages/CartData'
 import Checkout from './Pages/Checkout'
 import Success from './Success'
 import Cancel from './Cancel'
+import Order from './Orderdetails'
 
 function App() {
   
@@ -28,6 +29,7 @@ function App() {
       <Route path='checkout' element={<Checkout/>}/>
       <Route path='success' element={<Success/>}/>
       <Route path='cancel' element={<Cancel/>}/>
+      <Route path='order' element={<Order/>}/> 
        </Route>
     </Routes>
     </BrowserRouter>
