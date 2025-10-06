@@ -4,10 +4,13 @@ import { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { FaStar } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { Addtocart } from "../CartSlice";
 
 
 const Home  = ()=>{
     const [mydata, setMydata] = useState([]);
+    const dispatch = useDispatch();
 
    const LoadData  =async()=>{
     const api = "http://localhost:8000/product/Displaydata"
@@ -28,7 +31,7 @@ const Home  = ()=>{
         return(
             <>
              <Card style={{ width: '19rem' }}>
-      <Card.Img variant="top" src={`http://localhost:8000/${key.defaultImage}`} width="100px" height="200px" />
+      <Card.Img variant="top" src={`http://localhost:8000/${key.defaultImage}`} width="100px" height="250px" />
       <Card.Body>
         <Card.Title>Products</Card.Title>
         <Card.Text>
@@ -45,7 +48,8 @@ const Home  = ()=>{
         <FaStar />
         <FaStar />
         </div>
-        <Button variant="warning">Addtocart</Button>
+        <Button variant="warning" onClick={()=>{dispatch(Addtocart({id:key._id, name:key.name, brand:key.brand, color:key.color,
+             price:key.price, defaultImage:key.defaultImage, image:key.image, qty:1}))}}>Addtocart</Button>
         </div>
       </Card.Body>
     </Card>
