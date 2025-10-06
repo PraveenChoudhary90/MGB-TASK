@@ -42,8 +42,19 @@ const Displaydata  =async(req,res)=>{
 }
 
 
+
+
+
 module.exports  ={
     CustomerInsert,
     ProductInsert,
     Displaydata
 }
+
+
+
+
+
+
+
+

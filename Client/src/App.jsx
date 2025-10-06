@@ -8,6 +8,8 @@ import Insert from './Pages/Insert'
 import Product from './Pages/Product'
 import Cartdata from './Pages/CartData'
 import Checkout from './Pages/Checkout'
+import Success from './Success'
+import Cancel from './Cancel'
 
 function App() {
   
@@ -24,6 +26,8 @@ function App() {
       <Route path='product' element={<Product/>}/>
       <Route path='cartdata' element={<Cartdata/>}/>
       <Route path='checkout' element={<Checkout/>}/>
+      <Route path='success' element={<Success/>}/>
+      <Route path='cancel' element={<Cancel/>}/>
        </Route>
     </Routes>
     </BrowserRouter>

@@ -1,15 +1,61 @@
 import { useSelector } from "react-redux";
 import Table from 'react-bootstrap/Table';
+import { loadStripe } from "@stripe/stripe-js";
+import Button from 'react-bootstrap/Button';
+import axios from "axios"
 
 const Checkout = ()=>{
      const Product = useSelector(state=>state.mycart.cart);
     console.log(Product);
+
+       const stripePromise = loadStripe("pk_test_51RKGV8I6Nv23y5n8CnPSGkkDTdti3DAKy5CKr9blkVJaYN3U0NZ5YAQSrPSMsSSn8yHWdeGx0LNhGWOwOSIbcpEz00lPNnsd4y");
+    const handlePay = async () => {
+        try {
+          const stripe = await stripePromise;
+          const api = "http://localhost:8000/create-checkout-session";
+      
+          // Reformat product data to include full image URLs
+          const formattedProduct = Product.map(item => ({
+            name: item.name,
+            brand:item.brand,
+            color:item.color,
+            price: item.price,        // Make sure it's a number
+            qty: item.qty,
+            defaultImage: `http://localhost:8000/${item.defaultImage}`
+          }));
+      console.log(formattedProduct);
+          // Send formatted data
+          const response = await axios.post(api, { Product:formattedProduct });
+      
+          const session = response.data;
+          if (!session.id) {
+            console.error("Stripe session not returned:", session);
+            return;
+          }
+      
+          // Redirect to Stripe
+          const result = await stripe.redirectToCheckout({
+            sessionId: session.id,
+          });
+      
+          if (result.error) {
+            console.error("Stripe error:", result.error.message);
+          }
+        } catch (err) {
+          console.error("Payment initiation failed:", err);
+        }
+      };
+      
     
         let count = 0;
         var TotalAmount = 0;
+         let productsName = "";
+         let imgURL = "";
         const ans = Product.map(key=>{
             count++;
             TotalAmount+=key.qty*key.price;
+             productsName += key.name + ", ";
+              imgURL = `http://localhost:8000/${key.defaultImage}`;
     
             return(
                 <>
@@ -47,9 +93,24 @@ const Checkout = ()=>{
         {ans}
       </tbody>
       </Table>
+
+
+       <div id="pay" style={{ textAlign: "center" }}>
+          <Button onClick={handlePay}>Pay Now!</Button>
+        </div>
     
         </>
     )
 }
 
 export default Checkout;
+
+
+
+
+   
+   
+  
+  
+              
+  
