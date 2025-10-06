@@ -7,6 +7,8 @@ require("dotenv").config();
 const ProRoute = require("./Route/PRoute");
 const path = require('path')
 const Stripe = require("stripe");
+app.use(express.json());
+
 const Order = require("./Model/OrderModel");
 
 const stripe = Stripe("sk_test_51RKGV8I6Nv23y5n8FULs22fqlEvCVt4gk6pAOlKalNovDxPRgSs91AMlSEDf7IJ3UMcf996zEui4gXtLZnjXzHSe009ZlwNm1S"); // Replace with your secret key
@@ -23,6 +25,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 mongoose.connect(process.env.CONNECTION).then(()=>{
     console.log("DATA BASE IS CONNECTED");
 })
+
 
 
 app.post("/create-checkout-session", async (req, res) => {
@@ -51,10 +54,10 @@ app.post("/create-checkout-session", async (req, res) => {
         cancel_url: "http://localhost:5173/cancel",
       });
   
-
+      res.send(session)
       
     // Save order in MongoDB
-    const totalAmount = Product.reduce((acc, item) => acc + item.price * item.qnty, 0);
+    const totalAmount = Product.reduce((acc, item) => acc + item.price * item.qty, 0);
 
     const newOrder = new Order({
       products: Product,
@@ -72,6 +75,7 @@ app.post("/create-checkout-session", async (req, res) => {
       res.status(500).json({ error: "Failed to create checkout session" });
     }
   });
+
 
 
 app.use("/product", ProRoute)

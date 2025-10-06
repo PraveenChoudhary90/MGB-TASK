@@ -8,9 +8,16 @@ const orderSchema = new mongoose.Schema({
       qty: Number,
       color:String,
       defaultImage: String,
+      customeremail:String
     },
   ],
-  amount: Number,
+      amount: Number,
+      name: String,
+      price: Number,
+      qty: Number,
+      color:String,
+      defaultImage: String,
+      customeremail:String,
   status: {
     type: String,
     default: "Success", // "pending", "paid", "failed"
