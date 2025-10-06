@@ -30,7 +30,7 @@ const Home  = ()=>{
      const ans  =mydata.map(key=>{
         return(
             <>
-             <Card style={{ width: '19rem' }}>
+             <Card style={{ width: '21rem' }}>
       <Card.Img variant="top" src={`http://localhost:8000/${key.defaultImage}`} width="100px" height="250px" />
       <Card.Body>
         <Card.Title>Products</Card.Title>
