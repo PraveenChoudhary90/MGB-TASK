@@ -3,12 +3,14 @@ import Table from 'react-bootstrap/Table';
 import { FaMinus } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
 import { Decrement, Increment, ProDelete } from "../CartSlice";
+import { useNavigate } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
 const Cartdata = ()=>{
    const dispatch = useDispatch();
     const Product = useSelector(state=>state.mycart.cart);
     console.log(Product);
 
-    
+    const navigate = useNavigate();
 
     let count = 0;
     var TotalAmount = 0;
@@ -58,6 +60,9 @@ const Cartdata = ()=>{
         {ans}
       </tbody>
       </Table>
+      <div id="DA">
+         <Button variant="primary" onClick={()=>{navigate("/checkout")}}>Checkout to Pay</Button>
+      </div>
         </>
     )
 }
