@@ -5,13 +5,14 @@ const bodyParser  =require("body-parser");
 const mongoose = require("mongoose");
 require("dotenv").config();
 const ProRoute = require("./Route/PRoute");
+const path = require('path')
 
 
 
 
 
 app.use(cors());
-
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 // Parse incoming requests with JSON payloads
 app.use(bodyParser.json());
 
