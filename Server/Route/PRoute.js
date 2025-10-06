@@ -22,6 +22,7 @@ const upload = multer({
 
 route.post("/ProductInsert",upload.array("image", 10), ProController.ProductInsert);
 route.post("/CustomerInsert", ProController.CustomerInsert)
+route.get("/Displaydata", ProController.Displaydata);
 
 
 
